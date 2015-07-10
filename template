@@ -1,0 +1,20 @@
+
+(function(__root__, __define__){
+
+  var define = function define(dependency, factory) {
+    if ( typeof __define__ === 'function' && __define__.amd){
+      __define__(dependency, factory);
+    } else if (typeof exports === 'object'){
+      module.exports = factory.apply(__root__, dependency.map(function(m){
+        return require(m);
+      }));
+    } else{
+      __root__['<% name %>'] = factory.apply(__root__, dependency.map(function(m){
+        return __root__[m.replace(/^.*\//, '')];
+      }));
+    }
+  };
+
+  <% target %>
+
+})(this, typeof define !== 'undefined' && define);

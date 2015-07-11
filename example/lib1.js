@@ -20,6 +20,14 @@
     }
   };
 
-  <% target %>
+  
+define(function(){
+  var myFunc = function(){
+    console.log('lib1');
+  };
+
+  return myFunc;
+});
+
 
 })(this, typeof define !== 'undefined' && define);

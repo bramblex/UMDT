@@ -1,6 +1,5 @@
 
 (function(__root__, __define__){
-
   var define = function define(dependencies, factory) {
 
     var factory = factory || dependencies;

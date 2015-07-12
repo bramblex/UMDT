@@ -8,27 +8,27 @@ if (process.argv.length != 4){
   process.exit(1);
 }
 
-var template_path = path.join(
+var wapper_path = path.join(
   path.resolve(path.dirname(__filename)),
-  'template'
+  'wapper'
 );
 
-var template = fs.readFileSync(template_path, 'utf8');
+var wapper = fs.readFileSync(wapper_path, 'utf8');
 
 var source_path = process.argv[2];
 var target_path = process.argv[3];
 
 var source = fs.readFileSync(source_path, 'utf8');
-var template = fs.readFileSync(template_path, 'utf8');
+var wapper = fs.readFileSync(wapper_path, 'utf8');
 
-var render = function render(template, values){
-  var t = template; 
-  template.match(/<%.*?%>/g).forEach(function(m){
+var render = function render(wapper, values){
+  var t = wapper; 
+  wapper.match(/<%.*?%>/g).forEach(function(m){
     var v = m.replace(/<%\s*(\w+)\s*%>/, '$1');
     t = t.replace(m, values[v]);
   });
   return t;
 };
 
-var target = render(template, {target: source});
+var target = render(wapper, {target: source});
 fs.writeFileSync(target_path, target, 'utf8');

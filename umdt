@@ -22,12 +22,10 @@ var source = fs.readFileSync(source_path, 'utf8');
 var wapper = fs.readFileSync(wapper_path, 'utf8');
 
 var render = function render(wapper, values){
-  var t = wapper; 
-  wapper.match(/<%.*?%>/g).forEach(function(m){
-    var v = m.replace(/<%\s*(\w+)\s*%>/, '$1');
-    t = t.replace(m, values[v]);
-  });
-  return t;
+  return wapper.split('%>').map(function(piece){
+    var p  = piece.split('<%');
+    return (p[0] || '') + ((p[1] && values[p[1].replace(/^\s*(\w+)\s*$/,'$1')]) || '');
+  }).join('');
 };
 
 var target = render(wapper, {target: source});

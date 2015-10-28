@@ -18,7 +18,8 @@
         return require(m);
       }));
     } else{
-      var name = document.currentScript.src.replace(/(^.*?)([^\/]+)\.js(\?.*$|$)/, '$2');
+      var name = document.currentScript.src.replace(/(^.*?)([^\/]+)\.(js)(\?.*$|$)/, '$2');
+      name = name.replace('.min', '');
       __root__[name] = factory.apply(__root__, dependencies.map(function(m){
         return __root__[m.replace(/^.*\//, '')];
       }));
